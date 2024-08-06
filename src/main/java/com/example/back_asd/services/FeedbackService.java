@@ -17,8 +17,6 @@ public class FeedbackService {
     private UserService userService;
 
     public Feedback createFeedback(Feedback feedback) {
-        feedback.setTask(taskService.getTask(feedback.getTask().getId()));
-        feedback.setGivenBy(userService.getUser(feedback.getGivenBy().getId()));
         return feedbackRepository.save(feedback);
     }
 
@@ -30,12 +28,7 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
-    public Feedback updateFeedback(String id, Feedback feedbackDetails) {
-        Feedback feedback = feedbackRepository.findById(id).orElseThrow();
-        feedback.setComment(feedbackDetails.getComment());
-        feedback.setRating(feedbackDetails.getRating());
-        feedback.setTask(taskService.getTask(feedbackDetails.getTask().getId()));
-        feedback.setGivenBy(userService.getUser(feedbackDetails.getGivenBy().getId()));
+    public Feedback updateFeedback(Feedback feedback) {
         return feedbackRepository.save(feedback);
     }
 

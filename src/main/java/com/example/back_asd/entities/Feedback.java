@@ -1,13 +1,15 @@
 package com.example.back_asd.entities;
 
-
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,13 +18,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Feedback {
     @Id
     private String id;
-    @DBRef
-    private Task task;
-    @DBRef
-    private User givenBy;
     private String comment;
     private Integer rating;
+    private List<String> imageUrls = new ArrayList<>();
 
     // getters and setters
 }
-

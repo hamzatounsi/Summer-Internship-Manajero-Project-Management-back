@@ -17,12 +17,6 @@ public class TaskService {
     private UserService userService;
 
     public Task createTask(Task task) {
-        if (task.getProject() != null && task.getProject().getId() != null) {
-            task.setProject(projectService.getProjectById(task.getProject().getId()));
-        } else {
-            throw new IllegalArgumentException("Project cannot be null");
-        }
-        task.setAssignedTo(userService.getUser(task.getAssignedTo().getId()));
         return taskRepository.save(task);
     }
 
@@ -34,13 +28,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Task updateTask(String id, Task taskDetails) {
-        Task task = taskRepository.findById(id).orElseThrow();
-        task.setName(taskDetails.getName());
-        task.setDescription(taskDetails.getDescription());
-        task.setStatus(taskDetails.getStatus());
-        task.setProject(projectService.getProjectById(taskDetails.getProject().getId()));
-        task.setAssignedTo(userService.getUser(taskDetails.getAssignedTo().getId()));
+    public Task updateTask(Task task) {
         return taskRepository.save(task);
     }
 

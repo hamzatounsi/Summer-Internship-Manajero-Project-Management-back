@@ -20,12 +20,7 @@ public class Task {
     private String id;
     private String name;
     private String description;
-    @DBRef
-    private Project project;
-    @DBRef
-    private User assignedTo;
     private String status;
-    private Date dueDate;
-
-    // getters and setters
+    private String priority;
+    private Date deadline;
 }
