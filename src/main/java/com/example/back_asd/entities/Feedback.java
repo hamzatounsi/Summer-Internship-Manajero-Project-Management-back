@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Feedback {
     private String comment;
     private Integer rating;
     private List<String> imageUrls = new ArrayList<>();
+    @DBRef
+    private Project project;
 
-    // getters and setters
 }

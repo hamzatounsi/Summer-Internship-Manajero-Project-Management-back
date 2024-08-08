@@ -1,6 +1,7 @@
 package com.example.back_asd.services;
 
 import com.example.back_asd.entities.Feedback;
+import com.example.back_asd.entities.Project;
 import com.example.back_asd.repositories.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ public class FeedbackService {
     private TaskService taskService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ProjectService projectService;
     public Feedback createFeedback(Feedback feedback) {
         return feedbackRepository.save(feedback);
     }
@@ -36,5 +38,10 @@ public class FeedbackService {
         feedbackRepository.deleteById(id);
     }
 
-    // additional service methods, if needed
+    public Feedback assignFeedbackToProject(String feedbackId, String projectId) {
+        Feedback feedback = getFeedback(feedbackId);
+        Project project = projectService.getProjectById(projectId);
+        feedback.setProject(project);
+        return updateFeedback(feedback);
+    }
 }

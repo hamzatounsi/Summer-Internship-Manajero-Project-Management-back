@@ -1,5 +1,6 @@
 package com.example.back_asd.services;
 
+import com.example.back_asd.entities.Project;
 import com.example.back_asd.entities.Task;
 import com.example.back_asd.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    // additional service methods, if needed
+    public Task assignTaskToProject(String taskId, String projectId) {
+        Task task = getTask(taskId);
+        Project project = projectService.getProjectById(projectId);
+        task.setProject(project);
+        return updateTask(task);
+    }
+
 }

@@ -84,4 +84,9 @@ public class FeedbackController {
     public void deleteFeedback(@PathVariable String id) {
         feedbackService.deleteFeedback(id);
     }
+
+    @PutMapping("/{feedbackId}/assign-project/{projectId}")
+    public Feedback assignFeedbackToProject(@PathVariable String feedbackId, @PathVariable String projectId) {
+        return feedbackService.assignFeedbackToProject(feedbackId, projectId);
+    }
 }

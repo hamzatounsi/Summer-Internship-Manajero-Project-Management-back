@@ -38,4 +38,9 @@ public class TaskController {
     public void deleteTask(@PathVariable String id) {
         taskService.deleteTask(id);
     }
+
+    @PutMapping("/{taskId}/assign-project/{projectId}")
+    public Task assignTaskToProject(@PathVariable String taskId, @PathVariable String projectId) {
+        return taskService.assignTaskToProject(taskId, projectId);
+    }
 }

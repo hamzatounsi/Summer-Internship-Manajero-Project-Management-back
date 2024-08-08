@@ -1,6 +1,7 @@
 package com.example.back_asd.controller;
 
 import com.example.back_asd.entities.Project;
+import com.example.back_asd.entities.Task;
 import com.example.back_asd.repositories.ProjectRepository;
 import com.example.back_asd.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public void deleteProject(@PathVariable String id) {
         projectService.deleteProject(id);
+    }
+    // ProjectController.java
+    @PutMapping("/{projectId}/add-task")
+    public Project addTaskToProject(@PathVariable String projectId, @RequestBody Task task) {
+        return projectService.addTaskToProject(projectId, task);
     }
 }
 
