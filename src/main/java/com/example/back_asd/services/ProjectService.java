@@ -38,7 +38,7 @@ public class ProjectService {
         }
         tasks.add(task);
         project.setTasks(tasks);
-        return updateProject(project);
+        return projectRepository.save(project);  // Utilisation directe de save pour enregistrer les changements
     }
 
     public Project updateProject(Project project) {
