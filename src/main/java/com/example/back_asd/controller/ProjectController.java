@@ -36,6 +36,11 @@ public class ProjectController {
         projectService.deleteProject(id);
     }
     // ProjectController.java
+    @PutMapping("/{id}")
+    public Project updateProject(@PathVariable String id, @RequestBody Project project) {
+        return projectService.updateProject(project);
+    }
+    // New method to add a task to a project
     @PutMapping("/{projectId}/add-task")
     public Project addTaskToProject(@PathVariable String projectId, @RequestBody Task task) {
         return projectService.addTaskToProject(projectId, task);

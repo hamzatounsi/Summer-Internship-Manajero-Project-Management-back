@@ -41,7 +41,7 @@ public class TaskService {
         Task task = getTask(taskId);
         Project project = projectService.getProjectById(projectId);
         task.setProject(project);
-        return updateTask(task);
+        return taskRepository.save(task);
     }
 
 }

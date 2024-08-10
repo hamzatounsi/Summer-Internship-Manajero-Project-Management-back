@@ -25,4 +25,7 @@ public class Feedback {
     @DBRef
     private Project project;
 
+    // New constructor to match the test parameters
+
+
 }

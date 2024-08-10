@@ -36,30 +36,33 @@ public class FeedbackController {
     @PostMapping
     public ResponseEntity<Feedback> createFeedback(MultipartHttpServletRequest request) {
         String comment = request.getParameter("comment");
-        Integer rating = Integer.parseInt(request.getParameter("rating"));
+        String ratingStr = request.getParameter("rating");
+
+        // Handle the case where rating might be null or empty
+        Integer rating = (ratingStr != null && !ratingStr.isEmpty()) ? Integer.parseInt(ratingStr) : null;
 
         Feedback feedback = new Feedback();
         feedback.setComment(comment);
         feedback.setRating(rating);
 
+        // Handle files if any
         List<MultipartFile> files = request.getFiles("images");
         List<String> imageUrls = new ArrayList<>();
-
         for (MultipartFile file : files) {
             try {
-                // Save file to server or cloud storage and get its URL/path
                 String fileName = file.getOriginalFilename();
-                String fileUrl = saveFile(file, fileName); // Implement this method
+                String fileUrl = saveFile(file, fileName); // Assume saveFile handles storage
                 imageUrls.add(fileUrl);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         feedback.setImageUrls(imageUrls);
+
         Feedback savedFeedback = feedbackService.createFeedback(feedback);
         return new ResponseEntity<>(savedFeedback, HttpStatus.CREATED);
     }
+
 
     private String saveFile(MultipartFile file, String fileName) throws IOException {
         Path directoryPath = Paths.get("uploads/");
