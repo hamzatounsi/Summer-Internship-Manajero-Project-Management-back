@@ -15,5 +15,6 @@ public class ProjectStatisticsDTO {
     private long numberOfTasks;
     private long numberOfFeedbacks;
     private double averageRating;
+    private double averageTaskCompletionTime;
+    private double percentageOfCompletedTasks;
 }
-

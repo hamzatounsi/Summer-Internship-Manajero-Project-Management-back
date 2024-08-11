@@ -1,5 +1,7 @@
 package com.example.back_asd.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "tasks")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Task {
     @Id
     private String id;
@@ -23,6 +26,7 @@ public class Task {
     private String status;
     private String priority;
     private Date deadline;
+    private Date completionDate; // New field
 
     @DBRef
     private Project project;
