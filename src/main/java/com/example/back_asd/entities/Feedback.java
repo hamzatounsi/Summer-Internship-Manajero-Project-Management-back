@@ -1,5 +1,7 @@
 package com.example.back_asd.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,16 +18,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "feedbacks")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Feedback {
     @Id
     private String id;
     private String comment;
     private Integer rating;
     private List<String> imageUrls = new ArrayList<>();
+
     @DBRef
     private Project project;
-
-    // New constructor to match the test parameters
-
-
 }
