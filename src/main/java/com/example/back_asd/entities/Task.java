@@ -30,4 +30,6 @@ public class Task {
 
     @DBRef
     private Project project;
+
+    private boolean isArchived = false;
 }

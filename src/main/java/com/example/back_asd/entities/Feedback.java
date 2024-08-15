@@ -28,4 +28,7 @@ public class Feedback {
 
     @DBRef
     private Project project;
+
+    private boolean isArchived = false;
+
 }

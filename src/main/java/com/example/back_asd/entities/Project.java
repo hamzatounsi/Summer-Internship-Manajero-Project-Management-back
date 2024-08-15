@@ -34,4 +34,6 @@ public class Project {
 
     @DBRef
     private List<Feedback> feedbacks;
+
+    private boolean isArchived = false;
 }

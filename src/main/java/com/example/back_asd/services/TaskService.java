@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -25,9 +26,9 @@ public class TaskService {
         return taskRepository.findById(id).orElseThrow();
     }
 
-    public List<Task> getAllTasks() {
+    /*public List<Task> getAllTasks() {
         return taskRepository.findAll();
-    }
+    }*/
 
     public Task updateTask(Task task) {
         return taskRepository.save(task);
@@ -42,6 +43,17 @@ public class TaskService {
         Project project = projectService.getProjectById(projectId);
         task.setProject(project);
         return taskRepository.save(task);
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll().stream()
+                .filter(feedback -> !feedback.isArchived())
+                .collect(Collectors.toList());
+    }
+    public List<Task> getAllArchivedTasks() {
+        return taskRepository.findAll().stream()
+                .filter(Task::isArchived)  // Only return feedbacks that are archived
+                .collect(Collectors.toList());
     }
 
 }

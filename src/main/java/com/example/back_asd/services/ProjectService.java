@@ -1,5 +1,6 @@
 package com.example.back_asd.services;
 
+import com.example.back_asd.entities.Feedback;
 import com.example.back_asd.entities.Project;
 import com.example.back_asd.entities.Task;
 import com.example.back_asd.repositories.ProjectRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -18,9 +20,9 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public List<Project> getAllProjects() {
+  /*  public List<Project> getAllProjects() {
         return projectRepository.findAll();
-    }
+    }*/
 
     public Project getProjectById(String id) {
         return projectRepository.findById(id).orElse(null);
@@ -43,6 +45,17 @@ public class ProjectService {
 
     public Project updateProject(Project project) {
         return projectRepository.save(project);
+    }
+
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll().stream()
+                .filter(feedback -> !feedback.isArchived())
+                .collect(Collectors.toList());
+    }
+    public List<Project> getAllArchivedProjects() {
+        return projectRepository.findAll().stream()
+                .filter(Project::isArchived)  // Only return feedbacks that are archived
+                .collect(Collectors.toList());
     }
 
 

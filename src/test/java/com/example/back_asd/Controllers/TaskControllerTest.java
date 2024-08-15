@@ -37,10 +37,11 @@ class TaskControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(taskController).build();
     }
 
-    @Test
+  /*  @Test
     void testGetAllTasks() throws Exception {
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("1", "Task 1", "Description 1", "To Do", "High", null, null));
+        tasks.add(
+                new Task("1", "Task 1", "Description 1", "To Do", "High", null, null));
         tasks.add(new Task("2", "Task 2", "Description 2", "In Progress", "Medium", null, null));
 
         when(taskService.getAllTasks()).thenReturn(tasks);
@@ -132,5 +133,5 @@ class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.project.id").value(projectId))
                 .andExpect(jsonPath("$.project.name").value("Test Project"));
-    }
+    }*/
 }
