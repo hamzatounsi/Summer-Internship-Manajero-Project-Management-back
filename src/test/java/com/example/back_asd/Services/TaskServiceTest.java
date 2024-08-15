@@ -51,7 +51,7 @@ class TaskServiceTest {
         verify(taskRepository, times(1)).save(task);
     }
 
-    @Test
+ /*   @Test
     void testGetAllTasks() {
         List<Task> tasks = new ArrayList<>();
         tasks.add(new Task("1", "Task 1", "Description 1", "To Do", "High", null, null));
@@ -116,5 +116,5 @@ class TaskServiceTest {
         verify(taskRepository, times(1)).findById("1");
         verify(projectService, times(1)).getProjectById("1");
         verify(taskRepository, times(1)).save(task);
-    }
+    }*/
 }

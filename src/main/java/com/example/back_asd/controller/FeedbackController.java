@@ -23,10 +23,10 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    @GetMapping
+   /* @GetMapping
     public List<Feedback> getAllFeedbacks() {
         return feedbackService.getAllFeedbacks();
-    }
+    }*/
 
     @GetMapping("/{id}")
     public Feedback getFeedbackById(@PathVariable String id) {
@@ -73,8 +73,13 @@ public class FeedbackController {
         Path filePath = directoryPath.resolve(fileName);
         Files.write(filePath, file.getBytes());
 
-        return filePath.toString(); // Return the path or URL of the saved file
+        // Assuming your application is running on http://localhost:8080
+        // Modify to match your actual server's URL and file serving path
+        return "/uploads/" + fileName;
     }
+
+
+
 
 
 
@@ -92,4 +97,38 @@ public class FeedbackController {
     public Feedback assignFeedbackToProject(@PathVariable String feedbackId, @PathVariable String projectId) {
         return feedbackService.assignFeedbackToProject(feedbackId, projectId);
     }
+
+    @PutMapping("/{id}/archive")
+    public ResponseEntity<Feedback> archiveFeedback(@PathVariable String id) {
+        Feedback feedback = feedbackService.getFeedback(id);
+        if (feedback != null) {
+            feedback.setArchived(true);
+            feedbackService.updateFeedback(feedback);
+            return ResponseEntity.ok(feedback);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/{id}/restore")
+    public ResponseEntity<Feedback> restoreFeedback(@PathVariable String id) {
+        Feedback feedback = feedbackService.getFeedback(id);
+        if (feedback != null && feedback.isArchived()) {
+            feedback.setArchived(false);
+            feedbackService.updateFeedback(feedback);
+            return ResponseEntity.ok(feedback);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public List<Feedback> getAllFeedbacks() {
+        return feedbackService.getAllFeedbacks();
+    }
+
+    @GetMapping("/archived")
+    public List<Feedback> getAllArchivedFeedbacks() {
+        return feedbackService.getAllArchivedFeedbacks();
+    }
+
+
+
 }

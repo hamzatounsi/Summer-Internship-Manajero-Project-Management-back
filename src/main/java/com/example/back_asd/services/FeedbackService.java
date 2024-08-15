@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FeedbackService {
@@ -26,9 +27,9 @@ public class FeedbackService {
         return feedbackRepository.findById(id).orElseThrow();
     }
 
-    public List<Feedback> getAllFeedbacks() {
+   /* public List<Feedback> getAllFeedbacks() {
         return feedbackRepository.findAll();
-    }
+    }*/
 
     public Feedback updateFeedback(Feedback feedback) {
         return feedbackRepository.save(feedback);
@@ -44,4 +45,16 @@ public class FeedbackService {
         feedback.setProject(project);
         return updateFeedback(feedback);
     }
+    public List<Feedback> getAllFeedbacks() {
+        return feedbackRepository.findAll().stream()
+                .filter(feedback -> !feedback.isArchived())
+                .collect(Collectors.toList());
+    }
+    public List<Feedback> getAllArchivedFeedbacks() {
+        return feedbackRepository.findAll().stream()
+                .filter(Feedback::isArchived)  // Only return feedbacks that are archived
+                .collect(Collectors.toList());
+    }
+
+
 }
