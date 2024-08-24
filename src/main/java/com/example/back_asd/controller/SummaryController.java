@@ -3,7 +3,10 @@ package com.example.back_asd.controller;
 import com.example.back_asd.entities.Summary;
 import com.example.back_asd.services.SummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @RestController
@@ -23,5 +26,22 @@ public class SummaryController {
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable String id) { service.deleteById(id); }
+
+    @PutMapping("/{id}")
+    public Summary update(@PathVariable String id, @RequestBody Summary summary) {
+        // Fetch the existing Summary by id
+        Summary existingSummary = service.findById(id);
+        if (existingSummary != null) {
+            // Update the fields with the new values
+            existingSummary.setIntroduction(summary.getIntroduction());
+            existingSummary.setCorePrinciples(summary.getCorePrinciples());
+            existingSummary.setKeyProcesses(summary.getKeyProcesses());
+            existingSummary.setAdvantagesLimitations(summary.getAdvantagesLimitations());
+            // Save the updated Summary back to the database
+            return service.save(existingSummary);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Summary not found");
+        }
+    }
 }
 
