@@ -46,8 +46,8 @@ class ProjectControllerTest {
     @Test
     void testGetAllProjects() throws Exception {
         List<Project> projects = new ArrayList<>();
-        projects.add(new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null));
-        projects.add(new Project("2", "Project 2", "Description 2", new Date(), new Date(), "Medium", "To Do", null, null));
+        projects.add(new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null, false));
+        projects.add(new Project("2", "Project 2", "Description 2", new Date(), new Date(), "Medium", "To Do", null, null, false));
 
         when(projectService.getAllProjects()).thenReturn(projects);
 
@@ -62,7 +62,7 @@ class ProjectControllerTest {
 
     @Test
     void testGetProjectById() throws Exception {
-        Project project = new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null);
+        Project project = new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null, false);
 
         when(projectService.getProjectById("1")).thenReturn(project);
 
@@ -76,7 +76,7 @@ class ProjectControllerTest {
 
     @Test
     void testCreateProject() throws Exception {
-        Project project = new Project("1", "New Project", "Project Description", new Date(), new Date(), "High", "In Progress", null, null);
+        Project project = new Project("1", "New Project", "Project Description", new Date(), new Date(), "High", "In Progress", null, null, false);
 
         when(projectService.createProject(any(Project.class))).thenReturn(project);
 
@@ -92,7 +92,7 @@ class ProjectControllerTest {
 
     @Test
     void testUpdateProject() throws Exception {
-        Project project = new Project("1", "Updated Project", "Updated Description", new Date(), new Date(), "Low", "Completed", null, null);
+        Project project = new Project("1", "Updated Project", "Updated Description", new Date(), new Date(), "Low", "Completed", null, null, false);
 
         when(projectService.updateProject(any(Project.class))).thenReturn(project);
 
@@ -105,7 +105,6 @@ class ProjectControllerTest {
 
         verify(projectService, times(1)).updateProject(any(Project.class));
     }
-
 
     @Test
     void testDeleteProject() throws Exception {
