@@ -36,4 +36,30 @@ public class Project {
     private List<Feedback> feedbacks;
 
     private boolean isArchived = false;
+    // Constructor that includes all fields
+    /*public Project(String id, String name, String description, Date startDate, Date endDate, String priority, String status, List<Task> tasks, List<Feedback> feedbacks, boolean isArchived) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priority = priority;
+        this.status = status;
+        this.tasks = tasks;
+        this.feedbacks = feedbacks;
+        this.isArchived = isArchived;
+    }
+
+    // If you need a constructor without the ID (for creating new instances without setting the ID manually)
+    public Project(String name, String description, Date startDate, Date endDate, String priority, String status, List<Task> tasks, List<Feedback> feedbacks, boolean isArchived) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priority = priority;
+        this.status = status;
+        this.tasks = tasks;
+        this.feedbacks = feedbacks;
+        this.isArchived = isArchived;
+    }*/
 }

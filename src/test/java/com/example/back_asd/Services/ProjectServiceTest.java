@@ -50,8 +50,8 @@ class ProjectServiceTest {
     @Test
     void testGetAllProjects() {
         List<Project> projects = new ArrayList<>();
-        projects.add(new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null));
-        projects.add(new Project("2", "Project 2", "Description 2", new Date(), new Date(), "Medium", "Not Started", null, null));
+        projects.add(new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", new ArrayList<>(), new ArrayList<>(), false));
+        projects.add(new Project("2", "Project 2", "Description 2", new Date(), new Date(), "Medium", "Not Started", new ArrayList<>(), new ArrayList<>(), false));
 
         when(projectRepository.findAll()).thenReturn(projects);
 
@@ -63,7 +63,7 @@ class ProjectServiceTest {
 
     @Test
     void testGetProjectById() {
-        Project project = new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", null, null);
+        Project project = new Project("1", "Project 1", "Description 1", new Date(), new Date(), "High", "In Progress", new ArrayList<>(), new ArrayList<>(), false);
 
         when(projectRepository.findById("1")).thenReturn(Optional.of(project));
 
